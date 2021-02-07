@@ -1,0 +1,31 @@
+name: counter_safe
+version: 0.1.0
+
+authors:
+  - Daniel Huffman <drhuffman12@gmail.com>
+
+# crystal: 1.0.0-dev
+
+license: MIT
+
+development_dependencies:
+
+  ameba:
+    github: crystal-ameba/ameba
+    version: ~> 0.13.4
+    # github: drhuffman12/ameba
+    #   branch: drhuffman12/bump_crystal_version_to_1
+
+  ## Un-comment/edit after Crystal 0.36.0 or 1.0 compatible:
+  spectator:
+    # gitlab: arctic-fox/spectator
+    # branch: master
+    # version: ">= 0.9.31"
+
+    github: drhuffman12/spectator
+    # branch: drhuffman12/bump_crystal_version_to_1
+    # branch: drhuffman12/master
+    branch: drhuffman12/bump_crystal_version_to_0_36_0b
+
+  faker:
+    github: askn/faker
