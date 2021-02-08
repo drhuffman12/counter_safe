@@ -10,11 +10,12 @@ license: MIT
 
 development_dependencies:
 
-  ameba:
-    github: crystal-ameba/ameba
-    version: ~> 0.13.4
-    # github: drhuffman12/ameba
-    #   branch: drhuffman12/bump_crystal_version_to_1
+  # # TODO: uncomment when Windows compatible (or when developing locally)
+  # ameba:
+  #   github: crystal-ameba/ameba
+  #   version: ~> 0.13.4
+  #   # github: drhuffman12/ameba
+  #   #   branch: drhuffman12/bump_crystal_version_to_1
 
   ## Un-comment/edit after Crystal 0.36.0 or 1.0 compatible:
   spectator:

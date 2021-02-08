@@ -8,10 +8,12 @@ on:
 
 jobs:
   build:
+    # continue-on-error: ${{ matrix.os.windows-latest }}
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        # os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest, macos-latest]
         crystal: [null]
         include:
           - os: ubuntu-latest
@@ -34,10 +36,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build
-        run: make
+        run: shards install --ignore-crystal-version
 
       - name: Test
-        run: make test
+        run: crystal spec
 
       - name: Check formatting
         run: crystal tool format --check src spec
@@ -45,9 +47,26 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
+      - name: Install Crystal
+        uses: oprypin/install-crystal@v1
+        with:
+          crystal: ${{matrix.crystal}}
+
       - name: Download source
         uses: actions/checkout@v2
-      - name: Build manpages
-        uses: Analog-inc/asciidoctor-action@master
-        with:
-          shellcommand: "make manpages"
+
+      - name: Build
+        run: shards install --ignore-crystal-version
+
+      - name: Docs
+        # run: crystal docs --project-name CounterSafe --project-version $(shards version)
+        # run: rm -R ./docs && crystal docs --project-name $(basename $(pwd)) --project-version $(shards version)
+        run: scripts/regen_docs
+
+  # docs:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Download source
+  #       uses: actions/checkout@v2
+  #     - name: Build docs
+  #       run: crystal docs
