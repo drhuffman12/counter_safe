@@ -13,7 +13,7 @@ Based on and with much thanks to: https://itnext.io/comparing-crystals-concurren
    ```yaml
    dependencies:
      counter_safe:
-       github: your-github-user/counter_safe
+       github: drhuffman12/counter_safe
    ```
 
 2. Run `shards install`
