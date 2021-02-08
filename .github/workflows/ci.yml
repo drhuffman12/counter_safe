@@ -51,7 +51,8 @@ jobs:
           crystal: ${{matrix.crystal}}
 
       - name: Docs
-        run: crystal docs
+        # run: crystal docs --project-name CounterSafe --project-version $(shards version)
+        run: crystal docs --project-name $(basename $(pwd)) --project-version $(shards version)
 
   # docs:
   #   runs-on: ubuntu-latest

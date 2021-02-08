@@ -1,4 +1,4 @@
-# require "./counter/*"
+require "./counter_safe/*"
 
 # TODO: Write documentation for `CounterSafe`
 module CounterSafe
