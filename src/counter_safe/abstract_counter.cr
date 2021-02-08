@@ -4,7 +4,6 @@ module CounterSafe
 
     def initialize
       @mux = Mutex.new
-      # @v = InternalCounterClass.new(0)
       init_counter!
     end
 
@@ -29,7 +28,6 @@ module CounterSafe
     def reset!
       # Reset the value for a single key
       @mux.lock
-      # @v = InternalCounterClass.new(0)
       init_counter!
     ensure
       @mux.unlock
@@ -95,32 +93,22 @@ module CounterSafe
 
     protected def init_counter!
       raise "NOT IMPLEMENTED!"
-      # @@v = InternalCounterClass.new(0)
-      # @v = InternalCounterClass.new(0)
     end
 
     protected def get_counter!
       raise "NOT IMPLEMENTED!"
-      # @@v
-      # @v
     end
 
     protected def get_counter!(key : String)
       raise "NOT IMPLEMENTED!"
-      # @@v[key]
-      # @v[key]
     end
 
     protected def set_counter!(the_value)
       raise "NOT IMPLEMENTED!"
-      # @@v = the_value
-      # @v = the_value
     end
 
     protected def set_counter!(key : String, the_value)
       raise "NOT IMPLEMENTED!"
-      # @@v[key] = the_value
-      # @v[key] = the_value
     end
   end
 end

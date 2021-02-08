@@ -1,6 +1,5 @@
 require "./counter_safe/*"
 
-# TODO: Write documentation for `CounterSafe`
 module CounterSafe
   # Example Usage:
   # * Shared counters
