@@ -13,7 +13,7 @@ module CounterSafe
   #
   # sleep 1.second
   # puts cs1.value("someKey")
-  # puts cs2.value("someKey") #=> Should be the same as 'cs1.value("someKey")'
+  # puts cs2.value("someKey") # => Should be the same as 'cs1.value("someKey")'
   # ```
   #
   # * Exclusive counters
@@ -24,7 +24,7 @@ module CounterSafe
   #   rand < 0.25 ? spawn ce1.inc("someKey") : spawn ce2.inc("someKey")
   # }
   # puts ce1.value("someKey")
-  # puts ce2.value("someKey") #=> Should be DIFFERENT than as 'cs1.value("someKey")'
+  # puts ce2.value("someKey") # => Should be DIFFERENT than as 'cs1.value("someKey")'
   # ```
 
   VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
