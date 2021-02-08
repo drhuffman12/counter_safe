@@ -103,7 +103,7 @@
 
 <ul><li><a href="src/counter_safe/shared.cr">CounterSafe::Shared</a>       -- e.g.: global shared counters</li><li><a href="src/counter_safe/exclusive.cr">CounterSafe::Exclusive</a> -- e.g.: class-local exclusive counters</li></ul>
 
-<p>Based on and with much thanks to: https://itnext.io/comparing-crystals-concurrency-with-that-of-go-part-ii-89049701b1a5</p>
+<p>Based on and with much thanks to: <a href="https://itnext.io/comparing-crystals-concurrency-with-that-of-go-part-ii-89049701b1a5">Comparing Crystal’s concurrency with that of Go (Part II)</a></p>
 
 <h2><a id="installation" class="anchor" href="#installation">
   <svg class="octicon-link" aria-hidden="true">
@@ -113,13 +113,9 @@
 
 <ol><li>Add the dependency to your <code>shard.yml</code>:</li></ol>
 
-<p><code></code>`yaml
-   dependencies:</p>
-
-<pre><code class="language-crystal"> counter_safe:
-   github: drhuffman12/counter_safe</code></pre>
-
-<p><code></code>`</p>
+<pre><code class="language-yaml">dependencies:
+  counter_safe:
+    github: drhuffman12/counter_safe</code></pre>
 
 <ol><li>Run <code>shards install</code>
   ... or <code>shards install --ignore-crystal-version</code></li></ol>
@@ -134,33 +130,27 @@
 
 <p>Example Usage:</p>
 
-<ul><li>Shared counters
-  <code></code>`
-  cs1 = CounterSafe::Shared.new
-  cs2 = CounterSafe::Shared.new
-  (1..1000).each {</li></ul>
+<ul><li>Shared counters:</li></ul>
 
-<pre><code class="language-crystal">rand <span class="o">&lt;</span> <span class="n">0.25</span> ? spawn cs1.inc(<span class="s">&quot;someKey&quot;</span>) : spawn cs2.inc(<span class="s">&quot;someKey&quot;</span>)</code></pre>
+<pre><code class="language-crystal">cs1 <span class="o">=</span> <span class="t">CounterSafe</span><span class="t">::</span><span class="t">Shared</span>.<span class="k">new</span>
+cs2 <span class="o">=</span> <span class="t">CounterSafe</span><span class="t">::</span><span class="t">Shared</span>.<span class="k">new</span>
+(<span class="n">1</span>..<span class="n">1000</span>).each {
+  rand <span class="o">&lt;</span> <span class="n">0.25</span> ? spawn cs1.inc(<span class="s">&quot;someKey&quot;</span>) : spawn cs2.inc(<span class="s">&quot;someKey&quot;</span>)
+}
 
-<p>}</p>
+sleep <span class="n">1</span>.second
+puts cs1.value(<span class="s">&quot;someKey&quot;</span>)
+puts cs2.value(<span class="s">&quot;someKey&quot;</span>) <span class="c">#=&gt; Should be the same as &#39;cs1.value(&quot;someKey&quot;)&#39;</span></code></pre>
 
-<p>sleep 1.second
-  puts cs1.value("someKey")
-  puts cs2.value("someKey") #=> Should be the same as 'cs1.value("someKey")'
-  <code></code>`</p>
+<ul><li>Exclusive counters:</li></ul>
 
-<ul><li>Exclusive counters
-  <code></code>`
-  ce1 = CounterSafe::Exclusive.new
-  ce2 = CounterSafe::Exclusive.new
-  (1..1000).each {</li></ul>
-
-<pre><code class="language-crystal">rand <span class="o">&lt;</span> <span class="n">0.25</span> ? spawn ce1.inc(<span class="s">&quot;someKey&quot;</span>) : spawn ce2.inc(<span class="s">&quot;someKey&quot;</span>)</code></pre>
-
-<p>}
-  puts ce1.value("someKey")
-  puts ce2.value("someKey") #=> Should be DIFFERENT than as 'cs1.value("someKey")'
-  <code></code>`</p>
+<pre><code class="language-crystal">ce1 <span class="o">=</span> <span class="t">CounterSafe</span><span class="t">::</span><span class="t">Exclusive</span>.<span class="k">new</span>
+ce2 <span class="o">=</span> <span class="t">CounterSafe</span><span class="t">::</span><span class="t">Exclusive</span>.<span class="k">new</span>
+(<span class="n">1</span>..<span class="n">1000</span>).each {
+  rand <span class="o">&lt;</span> <span class="n">0.25</span> ? spawn ce1.inc(<span class="s">&quot;someKey&quot;</span>) : spawn ce2.inc(<span class="s">&quot;someKey&quot;</span>)
+}
+puts ce1.value(<span class="s">&quot;someKey&quot;</span>)
+puts ce2.value(<span class="s">&quot;someKey&quot;</span>) <span class="c">#=&gt; Should be DIFFERENT than as &#39;cs1.value(&quot;someKey&quot;)&#39;</span></code></pre>
 
 <p>See also API doc's at: https://drhuffman12.github.io/counter_safe</p>
 
