@@ -50,6 +50,8 @@ Example Usage:
   puts ce2.value("someKey") #=> Should be DIFFERENT than as 'cs1.value("someKey")'
   ```
 
+See also API doc's at: https://drhuffman12.github.io/counter_safe
+
 ## Contributing
 
 1. Fork it (<https://github.com/your-github-user/counter_safe/fork>)
