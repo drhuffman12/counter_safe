@@ -50,6 +50,12 @@ jobs:
         with:
           crystal: ${{matrix.crystal}}
 
+      - name: Download source
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: shards install --ignore-crystal-version
+
       - name: Docs
         # run: crystal docs --project-name CounterSafe --project-version $(shards version)
         run: crystal docs --project-name $(basename $(pwd)) --project-version $(shards version)

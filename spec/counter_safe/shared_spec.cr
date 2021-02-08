@@ -85,7 +85,7 @@ Spectator.describe CounterSafe::Shared do
       counter1.reset!
       counter2.reset!
     end
-    
+
     it "shares the counts for same key" do
       expected_counter = 0
       value1_before = counter1.value(key).clone
