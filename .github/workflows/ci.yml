@@ -45,6 +45,11 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
+      - name: Install Crystal
+        uses: oprypin/install-crystal@v1
+        with:
+          crystal: ${{matrix.crystal}}
+
       - name: Docs
         run: crystal docs
 
