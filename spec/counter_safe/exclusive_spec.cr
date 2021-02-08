@@ -10,6 +10,18 @@ Spectator.describe CounterSafe::Exclusive do
   #     }.no_to raise_error
   #   end
   # end
+  it "example usage" do
+    cs1 = CounterSafe::Exclusive.new
+    cs2 = CounterSafe::Exclusive.new
+    (1..1000).each {
+      rand < 0.25 ? spawn cs1.inc("someKey") : spawn cs2.inc("someKey")
+    }
+
+    sleep 1.second
+    value1 = cs1.value("someKey")
+    value2 = cs2.value("someKey")
+    expect(value1).not_to eq(value2)
+  end
 
   describe "#initialize" do
     it "does not raise" do

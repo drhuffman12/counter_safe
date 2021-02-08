@@ -1,18 +1,5 @@
 module CounterSafe
   abstract class AbstractCounter
-    # Based on and with much thanks to: https://itnext.io/comparing-crystals-concurrency-with-that-of-go-part-ii-89049701b1a5
-    #
-    # Example Usage:
-    # ```
-    # c = CounterSafe::Safe.new
-    # (1..1000).each {
-    #   spawn c.inc("someKey")
-    # }
-    #
-    # sleep 1.second
-    # puts c.value("someKey")
-    # ```
-
     alias InternalCounterClass = Hash(String, Int32)
 
     def initialize

@@ -1,6 +1,10 @@
 # counter_safe
 
-TODO: Write a description here
+Thread safe counters:
+* [CounterSafe::Shared](src/counter_safe/shared.cr)       -- e.g.: global shared counters
+* [CounterSafe::Exclusive](src/counter_safe/exclusive.cr) -- e.g.: class-local exclusive counters
+
+Based on and with much thanks to: https://itnext.io/comparing-crystals-concurrency-with-that-of-go-part-ii-89049701b1a5
 
 ## Installation
 
@@ -21,11 +25,30 @@ TODO: Write a description here
 require "counter_safe"
 ```
 
-TODO: Write usage instructions here
+Example Usage:
+* Shared counters
+  ```
+  cs1 = CounterSafe::Shared.new
+  cs2 = CounterSafe::Shared.new
+  (1..1000).each {
+    rand < 0.25 ? spawn cs1.inc("someKey") : spawn cs2.inc("someKey")
+  }
 
-## Development
+  sleep 1.second
+  puts cs1.value("someKey")
+  puts cs2.value("someKey") #=> Should be the same as 'cs1.value("someKey")'
+  ```
 
-TODO: Write development instructions here
+* Exclusive counters
+  ```
+  ce1 = CounterSafe::Exclusive.new
+  ce2 = CounterSafe::Exclusive.new
+  (1..1000).each {
+    rand < 0.25 ? spawn ce1.inc("someKey") : spawn ce2.inc("someKey")
+  }
+  puts ce1.value("someKey")
+  puts ce2.value("someKey") #=> Should be DIFFERENT than as 'cs1.value("someKey")'
+  ```
 
 ## Contributing
 
@@ -37,4 +60,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [Daniel Huffman](https://github.com/your-github-user) - creator and maintainer
+- [Daniel Huffman](https://github.com/drhuffman12) - creator and maintainer
