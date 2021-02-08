@@ -52,6 +52,23 @@ puts ce2.value("someKey") #=> Should be DIFFERENT than as 'cs1.value("someKey")'
 
 See also API doc's at: https://drhuffman12.github.io/counter_safe
 
+## Development
+
+REMINDER: Be sure to do separate PR's for:
+(a) one or more PR(s) for 'regular' src/spec changes
+```
+# misc changes, then (before pushing your changes) run:
+scripts/reformat
+crystal spec
+```
+
+(b) followed by one PR for version bump and update docs
+```
+# bump version in `shards.yml`, then (before pushing your changes) run:
+scripts/regen_docs
+```
+
+
 ## Contributing
 
 1. Fork it (<https://github.com/your-github-user/counter_safe/fork>)
