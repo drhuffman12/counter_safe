@@ -1,5 +1,9 @@
 # counter_safe
 
+![example branch parameter](https://github.com/drhuffman12/counter_safe/workflows/CI/badge.svg?branch=master)
+
+[![GitHub release](https://img.shields.io/github/release/drhuffman12/counter_safe.svg)](https://GitHub.com/drhuffman12/counter_safe/releases/)
+
 Thread safe counters:
 * [CounterSafe::Shared](src/counter_safe/shared.cr)       -- e.g.: global shared counters
 * [CounterSafe::Exclusive](src/counter_safe/exclusive.cr) -- e.g.: class-local exclusive counters
